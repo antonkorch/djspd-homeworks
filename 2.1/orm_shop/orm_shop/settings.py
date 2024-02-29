@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ct07@4=j-4d#m1em8et9ok_%@hi)p($e*l9okih!58n1owm@oi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vps.antonk.space','www.vps.antonk.space']
 
 
 # Application definition
@@ -79,10 +79,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dj_orm',
-        'USER': 'adilet',
-        'PASSWORD': '1',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
-        'PORT': 5432
+        'PORT': 12345
     }
 }
 

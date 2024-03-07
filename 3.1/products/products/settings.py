@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9iq^sf2=jrsjl*(@$-mspn#7h&v+6qct3i-%v8z^%e=&g5jf1b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vps.antonk.space', 'www.vps.antonk.space']
 
 
 # Application definition
@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'products.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'название_БД',
-        'USER': 'имя_пользователя',
-        'PASSWORD': 'пароль',
+        'NAME': 'api-shop',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': "localhost",
-        "PORT": 5432
+        "PORT": 12345
     }
 }
 

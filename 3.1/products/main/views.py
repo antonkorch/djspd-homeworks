@@ -5,28 +5,36 @@ from rest_framework.views import APIView
 
 from main.serializers import ReviewSerializer, ProductListSerializer, ProductDetailsSerializer
 
+from .models import Product, Review
 
 @api_view(['GET'])
 def products_list_view(request):
-    """реализуйте получение всех товаров из БД
-    реализуйте сериализацию полученных данных
-    отдайте отсериализованные данные в Response"""
-    pass
+    products = Product.objects.all()
+    result = ProductListSerializer(products, many=True)
+    return Response(result.data)
 
 
 class ProductDetailsView(APIView):
     def get(self, request, product_id):
-        """реализуйте получение товара по id, если его нет, то выдайте 404
-        реализуйте сериализацию полученных данных
-        отдайте отсериализованные данные в Response"""
-        pass
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response(status=404)
+            
+        result = ProductDetailsSerializer(product)
+        return Response(result.data)
 
 
 # доп задание:
 class ProductFilteredReviews(APIView):
     def get(self, request, product_id):
-        """обработайте значение параметра mark и
-        реализуйте получение отзывов по конкретному товару с определённой оценкой
-        реализуйте сериализацию полученных данных
-        отдайте отсериализованные данные в Response"""
-        pass
+        try:
+            reviews = Review.objects.filter(product=product_id)
+        except Review.DoesNotExist:
+            return Response(status=404)
+
+        params = request.query_params
+        if 'mark' in params:
+            reviews = reviews.filter(mark=params['mark'])
+        result = ReviewSerializer(reviews, many=True)
+        return Response(result.data)
